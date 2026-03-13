@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap');
+ 
+        /* Leaflet popup reset */
+        .leaflet-popup-content-wrapper {
+          background: rgba(8,8,22,0.95) !important;
+          border: 1px solid rgba(212,175,55,0.2) !important;
+          border-radius: 16px !important;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.6) !important;
+          padding: 0 !important;
+          backdrop-filter: blur(20px);
+        }
+        .leaflet-popup-content { margin: 0 !important; }
+        .leaflet-popup-tip { background: rgba(8,8,22,0.95) !important; }
+        .leaflet-popup-close-button { color: rgba(212,175,55,0.6) !important; top: 8px !important; right: 10px !important; font-size: 18px !important; }
+        .leaflet-popup-close-button:hover { color: #d4af37 !important; }
+ 
+        /* Header */
+        .mem-header {
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          z-index: 1000;
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
+          align-items: center;
+          padding: 0 20px;
+          height: 64px;
+          background: rgba(4,4,15,0.7);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(212,175,55,0.1);
+        }
+        .mem-logo {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .mem-logo-dot {
+          width: 8px; height: 8px;
+          background: #d4af37;
+          border-radius: 50%;
+          box-shadow: 0 0 8px #d4af37;
+          animation: glow 2s ease-in-out infinite;
+        }
+        @keyframes glow {
+          0%,100% { box-shadow: 0 0 8px #d4af37; }
+          50% { box-shadow: 0 0 16px #d4af37; }
+        }
+        .mem-logo-text {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #f0e6c8;
+          letter-spacing: 0.04em;
+        }
+        .mem-header-center { text-align: center; }
+        .mem-title {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(1rem, 3vw, 1.4rem);
+          font-weight: 400;
+          color: #f0e6c8;
+          letter-spacing: 0.06em;
+          white-space: nowrap;
+        }
+ 
+        /* User area */
+        .mem-user-area {
+          display: flex;
+          justify-content: flex-end;
+          position: relative;
+        }
+        .mem-avatar-btn {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(212,175,55,0.06);
+          border: 1px solid rgba(212,175,55,0.15);
+          border-radius: 100px;
+          padding: 4px 10px 4px 4px;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+        .mem-avatar-btn:hover {
+          background: rgba(212,175,55,0.1);
+          border-color: rgba(212,175,55,0.3);
+        }
+        .mem-avatar {
+          width: 34px; height: 34px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid rgba(212,175,55,0.3);
+        }
+ 
+        /* Dropdown */
+        .mem-dropdown {
+          position: absolute;
+          top: calc(100% + 10px);
+          right: 0;
+          width: 220px;
+          background: rgba(8,8,22,0.96);
+          border: 1px solid rgba(212,175,55,0.15);
+          border-radius: 14px;
+          backdrop-filter: blur(30px);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+          overflow: hidden;
+          animation: dropReveal 0.15s ease both;
+        }
+        @keyframes dropReveal {
+          from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .mem-dropdown-user {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 16px;
+        }
+        .mem-dropdown-avatar {
+          width: 36px; height: 36px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 1px solid rgba(212,175,55,0.3);
+          flex-shrink: 0;
+        }
+        .mem-dropdown-name {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: #f0e6c8;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .mem-dropdown-email {
+          font-size: 0.72rem;
+          color: rgba(200,184,126,0.4);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .mem-dropdown-divider {
+          height: 1px;
+          background: rgba(212,175,55,0.08);
+          margin: 0 12px;
+        }
+        .mem-dropdown-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          width: 100%;
+          padding: 10px 16px;
+          background: none;
+          border: none;
+          color: rgba(200,184,126,0.7);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.85rem;
+          cursor: pointer;
+          transition: all 0.15s;
+          text-align: left;
+        }
+        .mem-dropdown-item:hover {
+          background: rgba(212,175,55,0.06);
+          color: #d4af37;
+        }
+        .mem-dropdown-logout:hover {
+          background: rgba(239,68,68,0.08);
+          color: #f87171;
+        }
+        .mem-dropdown-logout:hover svg { stroke: #f87171; }
+ 
+        /* Stats */
+        .mem-stats {
+          position: absolute;
+          bottom: 90px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          background: rgba(4,4,15,0.75);
+          border: 1px solid rgba(212,175,55,0.12);
+          border-radius: 100px;
+          padding: 8px 18px;
+          backdrop-filter: blur(20px);
+          white-space: nowrap;
+        }
+        .mem-stat {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.78rem;
+          color: rgba(200,184,126,0.7);
+        }
+        .mem-stat-divider {
+          width: 1px; height: 14px;
+          background: rgba(212,175,55,0.15);
+        }
+ 
+        /* FAB */
+        .mem-fab {
+          position: absolute;
+          bottom: 28px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: linear-gradient(135deg, #d4af37, #9a7b20);
+          color: #04040f;
+          border: none;
+          border-radius: 100px;
+          padding: 13px 26px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 500;
+          cursor: pointer;
+          box-shadow: 0 8px 30px rgba(212,175,55,0.35), 0 2px 8px rgba(0,0,0,0.4);
+          transition: all 0.25s;
+        }
+        .mem-fab:hover {
+          transform: translateX(-50%) translateY(-2px);
+          box-shadow: 0 12px 40px rgba(212,175,55,0.5);
+        }
+        .mem-fab:active { transform: translateX(-50%) scale(0.97); }
+ 
+        /* Responsive */
+        @media (max-width: 600px) {
+          .mem-logo-text { display: none; }
+          .mem-title { font-size: 0.95rem; }
+          .mem-stats { bottom: 84px; font-size: 0.72rem; padding: 7px 14px; }
+          .mem-fab { padding: 11px 20px; font-size: 0.85rem; }
+          .mem-dropdown { width: 190px; }
+        }

@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import 'leaflet/dist/leaflet.css';
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.glass-container {
+  background: rgba(40, 40, 54, 0.72);
+  border-radius: 1rem;
+  box-shadow: 0 8px 36px rgba(26,22,49,0.8), 0 1.5px 10px #32ffd46b;
+  backdrop-filter: blur(18px);
+  border: 1.5px solid rgba(255,255,255,0.14);
+}
+.glow-btn {
+  background: linear-gradient(90deg, #1dc8e4 0%, #50e3c2 100%);
+  box-shadow: 0 0 16px 2px #1dc8e480;
+  transition: filter 0.2s, box-shadow 0.2s;
+}
+.glow-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 32px 6px #1dc8e4cc;
+}
+.input-dark {
+  background: rgba(24, 28, 38, 0.97);
+  color: #e3e7ef;
+  border-radius: 0.7rem;
+  border: 0.1px solid #70708144;
+}
