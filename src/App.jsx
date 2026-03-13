@@ -7,7 +7,7 @@ import Memory from './Memory';
 import CreateMemory from "./CreateMemory";
 import ProfileImage from "./Components/ProfileEdit";
 import ProtectedRoute from "./Components/ProtectedRoute";
-import socket from "./socket/scoket";
+import socket from "./socket/socket";
  
 export default function App() {
   const [user, setUser] = useState(undefined); 
