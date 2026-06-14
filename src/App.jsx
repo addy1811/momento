@@ -8,7 +8,6 @@ import CreateMemory from "./CreateMemory";
 import ProfileImage from "./Components/ProfileEdit";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import socket from "./socket/socket";
- 
 export default function App() {
   const [user, setUser] = useState(undefined); 
   
@@ -60,12 +59,12 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/memory" element={ <ProtectedRoute user = {user}>
         <Memory user={user} refreshUser={refreshUser} onLogout={handleLogout} />
-         </ProtectedRoute> }/>
+        </ProtectedRoute> }/>
  
-         <Route path="/create-memory" element={<ProtectedRoute user={user}>
-         <CreateMemory /> 
-         </ProtectedRoute>} />
-         <Route path="/editProfile"element={ <ProtectedRoute user={user}>
+        <Route path="/create-memory" element={<ProtectedRoute user={user}>
+        <CreateMemory /> 
+        </ProtectedRoute>} />
+        <Route path="/editProfile"element={ <ProtectedRoute user={user}>
         <ProfileImage refreshUser={refreshUser} />
         </ProtectedRoute>}
           />

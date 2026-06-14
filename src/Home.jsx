@@ -47,7 +47,6 @@ export default function Home({ user, handleLogin, handleLogout }) {
         </div>
       </nav>
  
-      {/* Hero */}
       <main className="home-hero">
         <div className="hero-badge">
           <span className="badge-dot" />
@@ -77,13 +76,11 @@ export default function Home({ user, handleLogin, handleLogout }) {
           </button>
         </div>
  
-        {/* Globe */}
         <div className="globe-wrapper">
           <div className="globe-glow" />
           <GlobeSection />
         </div>
  
-        {/* Stats */}
         <div className="stats-row">
           {[
             { num: "195+", label: "Countries" },

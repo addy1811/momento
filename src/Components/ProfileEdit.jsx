@@ -82,7 +82,6 @@ export default function ProfileEdit({ refreshUser }) {
           <p className="pe-sub">Update your traveler identity</p>
         </div>
  
-        {/* Avatar */}
         <div className="pe-avatar-section">
           <label className="pe-avatar-label" htmlFor="pe-photo">
             <div className="pe-avatar-wrap">

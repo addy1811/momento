@@ -70,7 +70,7 @@ export default function CreateMemory() {
       <div className="cm-orb cm-orb-2" />
  
       <div className="cm-card">
-        {/* Back */}
+
         <button className="cm-back" onClick={() => navigate("/memory")}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M12 5l-7 7 7 7" />
@@ -85,7 +85,7 @@ export default function CreateMemory() {
         </div>
  
         <form onSubmit={handleSubmit} className="cm-form">
-          {/* Country */}
+
           <div className="cm-field">
             <label className="cm-label">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -111,7 +111,6 @@ export default function CreateMemory() {
             </div>
           </div>
  
-          {/* Image upload */}
           <div className="cm-field">
             <label className="cm-label">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
