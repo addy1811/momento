@@ -4,6 +4,11 @@ Momento is a full-stack, real-time memory map, drop a photo on the country it be
 
 ---
 
+**Live Demo**
+- Frontend: https://momento-ebon-phi.vercel.app/
+- Backend: https://expense-tracker-h0xa.onrender.com
+---
+
 ## What it does
 
 - **Accounts & sessions** — sign up, log in, and stay logged in via a secure `httpOnly` JWT cookie
