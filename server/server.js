@@ -16,11 +16,11 @@ import session from "express-session";
  
 dotenv.config();
  
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
-const BACKEND_URL  = process.env.BACKEND_URL  || "http://localhost:4000";
-const PORT         = process.env.PORT          || 4000;
-const SECRET       = process.env.JWT_SECRET    || "fallback_secret_for_dev_only";
-const isProd       = process.env.NODE_ENV === "production";
+const FRONTEND_URL = process.env.FRONTEND_URL;
+const BACKEND_URL  = process.env.BACKEND_URL;
+const PORT         = process.env.PORT;
+const SECRET       = process.env.JWT_SECRET;
+const isProd       = process.env.NODE_ENV;
  
 /* ------------------ APP + SERVER ------------------ */
  
@@ -56,10 +56,10 @@ const pool = process.env.DATABASE_URL
       ssl: { rejectUnauthorized: false }  
     })
   : new pg.Pool({
-      user:     process.env.DB_USER    
-      host:     process.env.DB_HOST    
-      database: process.env.DB_NAME     
-      password: process.env.DB_PASSWORD 
+      user:     process.env.DB_USER,  
+      host:     process.env.DB_HOST,   
+      database: process.env.DB_NAME,     
+      password: process.env.DB_PASSWORD, 
       port:     Number(process.env.DB_PORT) 
     });
  
