@@ -46,7 +46,7 @@ family-tracker/
 ├── public/
 │   └── countries.geojson       # Country boundary data used for the map + dropdown
 ├── src/
-│   ├── assets/                 # Static images (default avatar, etc.)
+│   ├── assets/                
 │   ├── Components/
 │   │   ├── Login.jsx
 │   │   ├── Signup.jsx
