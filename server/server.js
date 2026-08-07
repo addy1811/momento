@@ -31,8 +31,6 @@ const io = new Server(httpServer, {
   cors: { origin: FRONTEND_URL, credentials: true }
 });
  
-/* ------------------ MIDDLEWARE ------------------ */
- 
 app.use(express.json({ limit: "2mb" }));
 app.use(cookieParser());
 app.use(cors({ origin: FRONTEND_URL, credentials: true }));
@@ -52,22 +50,19 @@ app.use(passport.session());
  
 /* ------------------ DB ------------------ */
  
-// In production use DATABASE_URL (Neon provides this)
-// In development fall back to individual fields
 const pool = process.env.DATABASE_URL
   ? new pg.Pool({
       connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false }   // required by Neon
+      ssl: { rejectUnauthorized: false }  
     })
   : new pg.Pool({
-      user:     process.env.DB_USER     || "postgres",
-      host:     process.env.DB_HOST     || "localhost",
-      database: process.env.DB_NAME     || "momento",
-      password: process.env.DB_PASSWORD || "aditya@123#",
-      port:     Number(process.env.DB_PORT) || 5432
+      user:     process.env.DB_USER    
+      host:     process.env.DB_HOST    
+      database: process.env.DB_NAME     
+      password: process.env.DB_PASSWORD 
+      port:     Number(process.env.DB_PORT) 
     });
  
-/* ------------------ CLOUDINARY ------------------ */
  
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -84,8 +79,6 @@ const storage = new CloudinaryStorage({
 });
  
 const upload = multer({ storage });
- 
-/* ------------------ HELPERS ------------------ */
  
 async function findOrCreateOAuthUser({ provider, providerId, name, email, photoUrl }) {
   const existing = await pool.query(
@@ -129,8 +122,6 @@ function issueTokenAndRedirect(req, res, user) {
   res.redirect(`${FRONTEND_URL}/memory`);
 }
  
-/* ------------------ PASSPORT ------------------ */
- 
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
  
@@ -156,7 +147,6 @@ passport.use(new GoogleStrategy(
   }
 ));
  
-/* ------------------ OAUTH ROUTES ------------------ */
  
 app.get("/api/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
@@ -169,7 +159,6 @@ app.get("/api/auth/google/callback",
   (req, res) => issueTokenAndRedirect(req, res, req.user)
 );
  
-/* ------------------ SOCKET AUTH ------------------ */
  
 io.use((socket, next) => {
   try {
@@ -190,7 +179,6 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => console.log(" Socket disconnected:", socket.userId));
 });
  
-/* ------------------ AUTH ROUTES ------------------ */
  
 app.post("/api/signup", async (req, res) => {
   const { name, email, password } = req.body;
@@ -309,8 +297,6 @@ app.delete("/api/memories/:id", async (req, res) => {
   }
 });
  
-/* ------------------ LOGOUT ------------------ */
- 
 app.post("/api/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
@@ -319,8 +305,6 @@ app.post("/api/logout", (req, res) => {
   });
   res.json({ success: true });
 });
- 
-/* ------------------ HEALTH CHECK ------------------ */
  
 app.get("/health", (req, res) => res.json({ status: "ok" }));
  
