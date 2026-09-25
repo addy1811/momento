@@ -77,7 +77,7 @@ family-tracker/
 └── README.md
 ```
 
-## 2. High-level architecture
+## High-level architecture
 
 <img width="1622" height="583" alt="image" src="https://github.com/user-attachments/assets/12d3140d-1562-492f-9e65-b967abba9b03" />
 
@@ -95,7 +95,7 @@ family-tracker/
 ---
 The app runs at `http://localhost:5173`, talking to the API at `http://localhost:4000`.
 ---
-## 3. Request/auth flow
+## Request/auth flow
  
 ```mermaid
 sequenceDiagram
@@ -129,7 +129,7 @@ one session mechanism for everything after login.
  
 ---
  
-## 4. Real-time sync flow
+## Real-time sync flow
  
 ```mermaid
 sequenceDiagram
@@ -155,9 +155,9 @@ attach without a valid session.
  
 ---
  
-## 5. Database design
+## Database design
  
-### 5.1 Entity-relationship diagram
+### Entity-relationship diagram
  
 ```mermaid
 erDiagram
@@ -193,7 +193,7 @@ erDiagram
     }
 ```
  
-### 5.2 Design decisions
+### Design decisions
  
 | Decision | Rationale |
 |---|---|
@@ -205,7 +205,7 @@ erDiagram
 | `public_id` stored alongside `photo_url` | Cloudinary needs the `public_id` (not the URL) to delete an asset — storing it at write time avoids parsing it back out of the URL on delete. |
 | Passwords hashed with bcrypt, cost factor 10 | Standard, well-understood default; see §7 for the roadmap note on stepping this up. |
  
-### 5.3 Indexing
+### Indexing
  
 - `idx_oauth_provider` on `(provider, provider_id)` — supports the OAuth
   login lookup directly.
