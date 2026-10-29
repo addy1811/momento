@@ -12,6 +12,8 @@ node_modules/
 dist/
 dist-ssr
 *.local
+.vercel/
+server/.env
 
 # Editor directories and files
 .vscode/*
@@ -23,3 +25,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+geo-source/
+countries_states_cities*.json
+cities*.json
+states*.json
+countries.json.bak

@@ -1,0 +1,50 @@
+/* drawer place chips */
+.mem-chips { display: flex; gap: 6px; margin: 0 0 14px; padding-bottom: 4px; overflow-x: auto; scrollbar-width: none; }
+.mem-chips::-webkit-scrollbar { display: none; }
+.mem-chips button { flex-shrink: 0; padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line, rgba(255,255,255,.1)); background: rgba(255,255,255,.05); color: var(--muted, #bbb); font-size: .78rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+.mem-chips button i { margin-left: 4px; font-style: normal; opacity: .6; }
+.mem-chips button.on { background: linear-gradient(135deg,#ff8a5b,#ff5f8f); border-color: transparent; color: #1a0d14; }
+.mem-stats-row { gap: 10px; }
+
+/* place line under each photo */
+.mc-place { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 14px 2px 0; font-size: .82rem; color: var(--text, #f4ede0); }
+.mc-place svg { color: #ffb36b; flex-shrink: 0; }
+.mc-place em { padding: 2px 8px; border-radius: 99px; font-style: normal; font-size: .68rem; background: rgba(255,179,107,.15); color: #ffb36b; }
+.mc-edit { margin-left: auto; padding: 4px 10px; border-radius: 99px; border: 1px solid rgba(255,138,91,.4); background: rgba(255,138,91,.08); color: #ffb36b; font-size: .72rem; font-weight: 600; cursor: pointer; }
+.mc-edit:hover { background: rgba(255,138,91,.18); }
+
+/* edit-place modal */
+.elm-backdrop { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 20px; background: rgba(4,6,16,.7); backdrop-filter: blur(6px); animation: dropIn .2s ease both; }
+.elm { position: relative; width: min(480px, 100%); max-height: 92vh; overflow-y: auto; padding: 26px 24px 22px; border-radius: 24px; border: 1px solid rgba(255,255,255,.12); background: linear-gradient(170deg, #141b3d, #0a0f26); box-shadow: 0 40px 100px rgba(0,0,0,.7); color: #f4ede0; }
+.elm h3 { margin: 0 0 4px; font-family: 'Fraunces', Georgia, serif; font-weight: 400; font-size: 1.5rem; }
+.elm p { margin: 0 0 16px; font-size: .85rem; color: rgba(244,237,224,.6); }
+.elm-close { position: absolute; top: 16px; right: 16px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 0; background: rgba(255,255,255,.08); color: #f4ede0; cursor: pointer; }
+.elm-error { margin-top: 12px; padding: 9px 12px; border-radius: 10px; background: rgba(255,95,143,.1); border: 1px solid rgba(255,95,143,.3); color: #ff8fb0; font-size: .82rem; }
+.elm-actions { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; margin-top: 18px; }
+.elm-cancel, .elm-save { padding: 12px; border-radius: 12px; font-size: .88rem; font-weight: 600; cursor: pointer; }
+.elm-cancel { border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); color: rgba(244,237,224,.75); }
+.elm-save { border: 0; background: linear-gradient(135deg,#ff8a5b,#ff5f8f); color: #1a0d14; box-shadow: 0 8px 24px rgba(255,95,143,.35); }
+.elm-save:disabled { opacity: .5; cursor: not-allowed; }
+
+/* create-memory page additions */
+.cm-card { max-width: 520px; }
+.cm-photo-hint { padding: 10px 14px; border-radius: 12px; border: 1px dashed rgba(45,212,191,.5); background: rgba(45,212,191,.08); color: #2dd4bf; font: 500 .82rem 'Manrope', sans-serif; text-align: left; cursor: pointer; }
+.cm-photo-hint b { color: #f4ede0; }
+.cm-photo-hint:hover { background: rgba(45,212,191,.15); }
+
+/* ---- carousel: country > state > city crumbs ---- */
+.mc-title { margin: 14px 2px 0; font-family: 'Fraunces', Georgia, serif; font-size: 1.15rem; color: #f4ede0; }
+.mc-crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 10px 2px 0; }
+.mc-crumb { padding: 3px 10px; border-radius: 99px; font-size: .74rem; font-weight: 600; }
+.mc-city { background: rgba(255,138,91,.16); color: #ffb36b; }
+.mc-state { background: rgba(45,212,191,.14); color: #5eead4; }
+.mc-country { background: rgba(139,124,246,.16); color: #b9afff; }
+.mc-prec { margin-left: auto; padding: 3px 9px; border-radius: 6px; font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; background: rgba(255,255,255,.07); color: rgba(244,237,224,.55); }
+.mc-prec.p3 { background: rgba(45,212,191,.16); color: #2dd4bf; }
+.mc-prec.p0 { background: rgba(255,179,107,.14); color: #ffb36b; }
+.mc-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 10px 2px 0; font-size: .74rem; color: rgba(244,237,224,.5); font-variant-numeric: tabular-nums; }
+.mc-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.mc-meta .mc-edit { margin-left: 0; }
+
+/* ---- create memory: numbered steps ---- */
+.cm-step { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg,#ff8a5b,#ff5f8f); color: #1a0d14; font-size: .7rem; font-weight: 800; letter-spacing: 0; }

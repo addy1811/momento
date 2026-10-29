@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import socket from "../socket/socket";
- import "../design/login.css";
- export default function Login() {
+ import AuthShell from "./AuthShell";
+import "../design/login.css";
+import homeLogo from "../assets/brand.png";
+
+ export default function Login({ refreshUser }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,38 +17,47 @@ import socket from "../socket/socket";
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ email, password })
-    });
-    setLoading(false);
-    if (!res.ok) {
-      const data = await res.json();
-      setError(data.error || "Invalid credentials");
-      return;
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        if (data.code === "EMAIL_NOT_VERIFIED") {
+          navigate(`/verify-email?email=${encodeURIComponent(email.trim().toLowerCase())}`);
+          return;
+        }
+        setError(data.error || "Invalid credentials");
+        return;
+      }
+
+      await refreshUser();
+      socket.connect();
+      navigate("/memory", { replace: true });
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
-    socket.connect();
-    navigate("/memory", { replace: true });
   };
- 
+
   const handleGoogle = () => { window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`; };
  
   return (
-    <div className="auth-root">
-      <div className="auth-bg" />
-      <div className="auth-orb auth-orb-1" />
-      <div className="auth-orb auth-orb-2" />
- 
-      <div className="auth-card">
+    <AuthShell>
         <button className="back-btn" onClick={() => navigate("/")}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
           Back
         </button>
  
         <div className="auth-header">
-          <div className="auth-icon">✦</div>
+          <div className="auth-icon">
+           <img src={homeLogo} alt="Home Logo" width={40} height={40} />
+         </div>
           <h1 className="auth-title">Welcome back</h1>
           <p className="auth-sub">Sign in to continue your journey</p>
         </div>
@@ -60,7 +72,7 @@ import socket from "../socket/socket";
             </svg>
             Continue with Google
           </button>
-          <button className="social-btn">
+          <button className="social-btn" disabled title="Coming soon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="#f0e6c8"/>
             </svg>
@@ -89,6 +101,9 @@ import socket from "../socket/socket";
               <input type={showPass ? "text" : "password"} className="field-input" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required />
               <button type="button" className="pass-toggle" onClick={() => setShowPass(!showPass)}>{showPass ? "Hide" : "Show"}</button>
             </div>
+            <span className="auth-link" style={{ alignSelf: "flex-end", fontSize: "0.78rem" }} onClick={() => navigate("/forgot-password")}>
+              Forgot password?
+            </span>
           </div>
           {error && (
             <div className="error-msg">
@@ -105,7 +120,6 @@ import socket from "../socket/socket";
           Don't have an account?{" "}
           <span className="auth-link" onClick={() => navigate("/signup")}>Sign up</span>
         </p>
-      </div>
-    </div>
+    </AuthShell>
   );
 }

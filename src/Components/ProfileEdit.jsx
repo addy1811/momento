@@ -10,6 +10,7 @@ export default function ProfileEdit({ refreshUser }) {
   const [preview, setPreview] = useState(AVATAR);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
  
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/me`, { credentials: "include" })
@@ -24,6 +25,11 @@ export default function ProfileEdit({ refreshUser }) {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Image must be under 5 MB.");
+      return;
+    }
+    setError(null);
     setPhoto(file);
     setPreview(URL.createObjectURL(file));
   };
@@ -46,8 +52,8 @@ export default function ProfileEdit({ refreshUser }) {
       setSuccess(true);
       setTimeout(() => navigate("/memory"), 1000);
     } else {
-      const err = await res.json();
-      console.error(err);
+      const err = await res.json().catch(() => ({}));
+      setError(err.error || "Could not save changes.");
     }
   };
  
@@ -129,6 +135,10 @@ export default function ProfileEdit({ refreshUser }) {
           </div>
         </div>
  
+        {error && (
+          <div style={{ color: "#f87171", fontSize: "0.82rem", marginBottom: 12 }}>{error}</div>
+        )}
+
         <div className="pe-actions">
           <button className="pe-cancel" onClick={() => navigate("/memory")}>Cancel</button>
           <button className="pe-save" onClick={handleSave} disabled={saving || success}>

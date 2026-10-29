@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthShell from "./AuthShell";
 import "../design/signup.css";
+import homeLogo from "../assets/brand.png";
+
 export default function Signup() {
   const navigate = useNavigate();
   const [name, setName] = useState('');
@@ -13,14 +16,15 @@ export default function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     if (!name || !email || !password) return setError("Please fill out all fields.");
+    if (password.length < 8) return setError("Password must be at least 8 characters.");
     setError(null); setLoading(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/signup`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }), credentials: "include",
       });
-      if (res.ok) { navigate("/login"); }
-      else { const data = await res.json(); setError(data.error || "Signup failed."); }
+      if (res.ok) { navigate(`/verify-email?email=${encodeURIComponent(email.trim().toLowerCase())}`); }
+      else { const data = await res.json().catch(() => ({})); setError(data.error || "Signup failed."); }
     } catch { setError("Network error. Please try again."); }
     finally { setLoading(false); }
   };
@@ -28,24 +32,22 @@ export default function Signup() {
   const handleGoogle = () => { window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`; };
  
   return (
-    <div className="auth-root">
-      <div className="auth-bg" />
-      <div className="auth-orb auth-orb-1" />
-      <div className="auth-orb auth-orb-2" />
- 
-      <div className="auth-card">
+    <AuthShell>
         <button className="back-btn" onClick={() => navigate("/")}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           Back
         </button>
  
         <div className="auth-header">
-          <div className="auth-icon">✦</div>
+         <div className="auth-icon">
+  <img src={homeLogo} alt="Home Logo" width={40} height={40} />
+</div>
           <h1 className="auth-title">Create account</h1>
-          <p className="auth-sub">Start pinning your memories to the world</p>
+         <p className="auth-sub"> Every memory belongs somewhere. Let's find its place.</p>
         </div>
  
-                  <button className="social-btn" onClick={handleGoogle}>
+                  <div className="social-btns">
+          <button className="social-btn" onClick={handleGoogle}>
             <svg width="18" height="18" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -54,12 +56,13 @@ export default function Signup() {
             </svg>
             Sign up with Google
           </button>
-          <button className="social-btn">
+          <button className="social-btn" disabled title="Coming soon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="#f0e6c8"/>
             </svg>
             Sign up with X
           </button>
+        </div>
  
  
         <div className="divider"><span>or create with email</span></div>
@@ -83,7 +86,7 @@ export default function Signup() {
             <label className="field-label">Password</label>
             <div className="field-wrap">
               <svg className="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <input type={showPass ? "text" : "password"} className="field-input" placeholder="Min. 8 characters" value={password} onChange={e => setPassword(e.target.value)} required />
+              <input type={showPass ? "text" : "password"} className="field-input" placeholder="Min. 8 characters" maxLength={72} value={password} onChange={e => setPassword(e.target.value)} required />
               <button type="button" className="pass-toggle" onClick={() => setShowPass(!showPass)}>{showPass ? "Hide" : "Show"}</button>
             </div>
             {password.length > 0 && (
@@ -107,7 +110,6 @@ export default function Signup() {
           Already have an account?{" "}
           <span className="auth-link" onClick={() => navigate("/login")}>Sign in</span>
         </p>
-      </div>
-    </div>
+    </AuthShell>
   );
 }

@@ -7,7 +7,7 @@ export default function GlobeSection() {
   useEffect(() => {
     if (globeEl.current) {
       globeEl.current.controls().autoRotate = true;
-      globeEl.current.controls().autoRotateSpeed = 1; // Adjust rotation speed as needed
+      globeEl.current.controls().autoRotateSpeed = 1; 
     }
   }, []);
 

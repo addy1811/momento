@@ -1,234 +1,125 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap');
- 
-        /* Leaflet popup reset */
-        .leaflet-popup-content-wrapper {
-          background: rgba(8,8,22,0.95) !important;
-          border: 1px solid rgba(212,175,55,0.2) !important;
-          border-radius: 16px !important;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.6) !important;
-          padding: 0 !important;
-          backdrop-filter: blur(20px);
-        }
-        .leaflet-popup-content { margin: 0 !important; }
-        .leaflet-popup-tip { background: rgba(8,8,22,0.95) !important; }
-        .leaflet-popup-close-button { color: rgba(212,175,55,0.6) !important; top: 8px !important; right: 10px !important; font-size: 18px !important; }
-        .leaflet-popup-close-button:hover { color: #d4af37 !important; }
- 
-        /* Header */
-        .mem-header {
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          z-index: 1000;
-          display: grid;
-          grid-template-columns: 1fr auto 1fr;
-          align-items: center;
-          padding: 0 20px;
-          height: 64px;
-          background: rgba(4,4,15,0.7);
-          backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(212,175,55,0.1);
-        }
-        .mem-logo {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-        .mem-logo-dot {
-          width: 8px; height: 8px;
-          background: #d4af37;
-          border-radius: 50%;
-          box-shadow: 0 0 8px #d4af37;
-          animation: glow 2s ease-in-out infinite;
-        }
-        @keyframes glow {
-          0%,100% { box-shadow: 0 0 8px #d4af37; }
-          50% { box-shadow: 0 0 16px #d4af37; }
-        }
-        .mem-logo-text {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 1.2rem;
-          font-weight: 600;
-          color: #f0e6c8;
-          letter-spacing: 0.04em;
-        }
-        .mem-header-center { text-align: center; }
-        .mem-title {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(1rem, 3vw, 1.4rem);
-          font-weight: 400;
-          color: #f0e6c8;
-          letter-spacing: 0.06em;
-          white-space: nowrap;
-        }
- 
-        /* User area */
-        .mem-user-area {
-          display: flex;
-          justify-content: flex-end;
-          position: relative;
-        }
-        .mem-avatar-btn {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          background: rgba(212,175,55,0.06);
-          border: 1px solid rgba(212,175,55,0.15);
-          border-radius: 100px;
-          padding: 4px 10px 4px 4px;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-        .mem-avatar-btn:hover {
-          background: rgba(212,175,55,0.1);
-          border-color: rgba(212,175,55,0.3);
-        }
-        .mem-avatar {
-          width: 34px; height: 34px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 2px solid rgba(212,175,55,0.3);
-        }
- 
-        /* Dropdown */
-        .mem-dropdown {
-          position: absolute;
-          top: calc(100% + 10px);
-          right: 0;
-          width: 220px;
-          background: rgba(8,8,22,0.96);
-          border: 1px solid rgba(212,175,55,0.15);
-          border-radius: 14px;
-          backdrop-filter: blur(30px);
-          box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-          overflow: hidden;
-          animation: dropReveal 0.15s ease both;
-        }
-        @keyframes dropReveal {
-          from { opacity: 0; transform: translateY(-6px) scale(0.98); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .mem-dropdown-user {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 14px 16px;
-        }
-        .mem-dropdown-avatar {
-          width: 36px; height: 36px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 1px solid rgba(212,175,55,0.3);
-          flex-shrink: 0;
-        }
-        .mem-dropdown-name {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.85rem;
-          font-weight: 500;
-          color: #f0e6c8;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .mem-dropdown-email {
-          font-size: 0.72rem;
-          color: rgba(200,184,126,0.4);
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .mem-dropdown-divider {
-          height: 1px;
-          background: rgba(212,175,55,0.08);
-          margin: 0 12px;
-        }
-        .mem-dropdown-item {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          width: 100%;
-          padding: 10px 16px;
-          background: none;
-          border: none;
-          color: rgba(200,184,126,0.7);
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.85rem;
-          cursor: pointer;
-          transition: all 0.15s;
-          text-align: left;
-        }
-        .mem-dropdown-item:hover {
-          background: rgba(212,175,55,0.06);
-          color: #d4af37;
-        }
-        .mem-dropdown-logout:hover {
-          background: rgba(239,68,68,0.08);
-          color: #f87171;
-        }
-        .mem-dropdown-logout:hover svg { stroke: #f87171; }
- 
-        /* Stats */
-        .mem-stats {
-          position: absolute;
-          bottom: 90px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 1000;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          background: rgba(4,4,15,0.75);
-          border: 1px solid rgba(212,175,55,0.12);
-          border-radius: 100px;
-          padding: 8px 18px;
-          backdrop-filter: blur(20px);
-          white-space: nowrap;
-        }
-        .mem-stat {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.78rem;
-          color: rgba(200,184,126,0.7);
-        }
-        .mem-stat-divider {
-          width: 1px; height: 14px;
-          background: rgba(212,175,55,0.15);
-        }
- 
-        /* FAB */
-        .mem-fab {
-          position: absolute;
-          bottom: 28px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 1000;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          background: linear-gradient(135deg, #d4af37, #9a7b20);
-          color: #04040f;
-          border: none;
-          border-radius: 100px;
-          padding: 13px 26px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.9rem;
-          font-weight: 500;
-          cursor: pointer;
-          box-shadow: 0 8px 30px rgba(212,175,55,0.35), 0 2px 8px rgba(0,0,0,0.4);
-          transition: all 0.25s;
-        }
-        .mem-fab:hover {
-          transform: translateX(-50%) translateY(-2px);
-          box-shadow: 0 12px 40px rgba(212,175,55,0.5);
-        }
-        .mem-fab:active { transform: translateX(-50%) scale(0.97); }
- 
-        /* Responsive */
-        @media (max-width: 600px) {
-          .mem-logo-text { display: none; }
-          .mem-title { font-size: 0.95rem; }
-          .mem-stats { bottom: 84px; font-size: 0.72rem; padding: 7px 14px; }
-          .mem-fab { padding: 11px 20px; font-size: 0.85rem; }
-          .mem-dropdown { width: 190px; }
-        }
+@import "./theme.css";
+
+.mem-root { position: relative; min-height: 100vh; height: 100vh; overflow: hidden; background: var(--ink); }
+.mem-aurora {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(55% 55% at 20% 20%, rgba(139, 124, 246, 0.22), transparent 60%),
+    radial-gradient(50% 50% at 85% 85%, rgba(255, 95, 143, 0.16), transparent 60%),
+    radial-gradient(40% 40% at 80% 15%, rgba(45, 212, 191, 0.12), transparent 60%);
+}
+.mem-stage { position: absolute; inset: 0; }
+.mem-map { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--ink); }
+.leaflet-container { background: var(--ink); font-family: var(--font-body); }
+.leaflet-bar a { background: rgba(10, 14, 34, 0.8) !important; color: var(--text) !important; border-color: var(--line) !important; }
+.leaflet-bar a:hover { background: rgba(255, 138, 91, 0.25) !important; }
+
+/* header */
+.mem-header {
+  position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 1200;
+  width: min(1100px, calc(100% - 28px)); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: 8px 10px 8px 18px; border: 1px solid var(--line); border-radius: 999px;
+  background: rgba(10, 14, 34, 0.6); backdrop-filter: blur(18px);
+}
+.mem-logo { display: inline-flex; align-items: center; gap: 9px; justify-self: start; background: none; border: 0; cursor: pointer; color: var(--text); font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; }
+.mem-logo-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ember); box-shadow: 0 0 12px var(--ember); }
+
+.mem-toggle { position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); }
+.mem-toggle button { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-width: 92px; padding: 8px 16px; background: none; border: 0; border-radius: 999px; color: var(--muted); font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: color 0.25s; }
+.mem-toggle button.on { color: #1a0d14; }
+.mem-toggle-pill { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 999px; background: var(--grad-ember); box-shadow: 0 6px 18px rgba(255, 95, 143, 0.4); transition: transform 0.4s var(--ease); }
+
+.mem-user { position: relative; justify-self: end; }
+.mem-avatar-btn { display: flex; align-items: center; gap: 6px; padding: 3px 10px 3px 3px; border-radius: 999px; background: var(--glass); border: 1px solid var(--line); color: var(--ember-soft); cursor: pointer; }
+.mem-avatar-btn:hover { background: rgba(255, 255, 255, 0.1); }
+.mem-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 138, 91, 0.5); }
+.mem-dropdown { position: absolute; top: calc(100% + 12px); right: 0; width: 230px; overflow: hidden; border-radius: 18px; border: 1px solid var(--line); background: rgba(10, 14, 34, 0.94); backdrop-filter: blur(26px); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6); animation: dropIn 0.18s var(--ease) both; }
+@keyframes dropIn { from { opacity: 0; transform: translateY(-6px) scale(0.97); } }
+.mem-dropdown-user { display: flex; align-items: center; gap: 10px; padding: 14px 16px; }
+.mem-dropdown-avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.mem-dropdown-name { font-size: 0.88rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+.mem-dropdown-email { font-size: 0.72rem; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+.mem-dropdown-divider { height: 1px; margin: 0 12px; background: var(--line); }
+.mem-dropdown-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 16px; background: none; border: 0; color: var(--muted); font-size: 0.86rem; cursor: pointer; text-align: left; transition: background 0.15s, color 0.15s; }
+.mem-dropdown-item:hover { background: rgba(255, 138, 91, 0.1); color: var(--ember-soft); }
+.mem-dropdown-logout:hover { background: rgba(255, 95, 143, 0.12); color: #ff8fb0; }
+
+/* stats card */
+.mem-stats { position: absolute; left: 20px; bottom: 24px; z-index: 1100; width: 230px; padding: 14px 16px; border-radius: 20px; border: 1px solid var(--line); background: rgba(10, 14, 34, 0.62); backdrop-filter: blur(18px); }
+.mem-stats-row { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); }
+.mem-stats-row span { display: inline-flex; align-items: center; gap: 6px; }
+.mem-stats-row svg { color: var(--ember-soft); }
+.mem-stats-row b { color: var(--text); }
+.mem-bar { height: 5px; margin: 12px 0 8px; border-radius: 99px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+.mem-bar i { display: block; height: 100%; border-radius: 99px; background: var(--grad-ember); box-shadow: 0 0 12px rgba(255, 138, 91, 0.6); transition: width 0.8s var(--ease); }
+.mem-stats small { color: var(--faint); font-size: 0.72rem; }
+
+/* fab */
+.mem-fab { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 1100; display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border: 0; border-radius: 999px; cursor: pointer; background: var(--grad-ember); color: #1a0d14; font-size: 0.94rem; font-weight: 700; box-shadow: 0 14px 36px rgba(255, 95, 143, 0.45); transition: transform 0.3s var(--ease), box-shadow 0.3s; }
+.mem-fab:hover { transform: translateX(-50%) translateY(-3px); box-shadow: 0 20px 48px rgba(255, 95, 143, 0.6); }
+.mem-fab:active { transform: translateX(-50%) scale(0.97); }
+
+/* empty state */
+.mem-empty { position: absolute; z-index: 1050; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; padding: 22px 30px; border-radius: 24px; background: rgba(7, 11, 26, 0.55); backdrop-filter: blur(10px); border: 1px solid var(--line); }
+.mem-empty h2 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 400; font-size: 1.8rem; }
+.mem-empty em { font-style: italic; background: var(--grad-ember); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.mem-empty p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+/* drawer */
+.mem-drawer { position: absolute; z-index: 1150; top: 86px; right: 18px; bottom: 18px; width: 372px; padding: 22px 20px 20px; overflow-y: auto; border-radius: 28px; border: 1px solid var(--line); background: linear-gradient(170deg, rgba(20, 27, 61, 0.88), rgba(10, 14, 34, 0.9)); backdrop-filter: blur(26px); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); animation: drawerIn 0.5s var(--ease) both; }
+@keyframes drawerIn { from { opacity: 0; transform: translateX(40px); } }
+.mem-drawer-close { position: absolute; top: 16px; right: 16px; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--glass); color: var(--muted); cursor: pointer; }
+.mem-drawer-close:hover { color: var(--text); background: rgba(255, 255, 255, 0.12); }
+.mem-drawer-kicker { margin: 0; color: var(--aurora); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; }
+.mem-drawer-title { margin: 4px 36px 2px 0; font-family: var(--font-display); font-weight: 400; font-size: 2rem; letter-spacing: -0.01em; line-height: 1.1; }
+.mem-drawer-meta { margin: 0 0 16px; color: var(--faint); font-size: 0.82rem; }
+.mem-drawer-add { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 16px; padding: 12px; border-radius: 14px; border: 1px dashed rgba(255, 138, 91, 0.45); background: rgba(255, 138, 91, 0.06); color: var(--ember-soft); font-size: 0.86rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.mem-drawer-add:hover { background: rgba(255, 138, 91, 0.14); }
+
+/* carousel */
+.mc-frame { position: relative; height: 250px; overflow: hidden; border-radius: 18px; background: #0a0f26; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
+.mc-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mc-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgba(7, 11, 26, 0.65), transparent 55%); }
+.mc-count { position: absolute; top: 12px; left: 12px; padding: 4px 11px; border-radius: 99px; font-size: 0.72rem; color: var(--text); background: rgba(7, 11, 26, 0.7); backdrop-filter: blur(8px); border: 1px solid var(--line); }
+.mc-delete { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; border: 1px solid rgba(255, 95, 143, 0.35); background: rgba(255, 95, 143, 0.2); color: #ff8fb0; cursor: pointer; transition: background 0.2s; }
+.mc-delete:hover { background: rgba(255, 95, 143, 0.45); }
+.mc-nav { position: absolute; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: rgba(7, 11, 26, 0.65); backdrop-filter: blur(8px); color: var(--text); cursor: pointer; transition: background 0.2s; }
+.mc-nav:hover { background: rgba(255, 138, 91, 0.35); }
+.mc-prev { left: 10px; } .mc-next { right: 10px; }
+.mc-desc { margin: 14px 2px 0; color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+.mc-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+.mc-dot { width: 6px; height: 6px; padding: 0; border: 0; border-radius: 99px; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: width 0.3s var(--ease), background 0.3s; }
+.mc-dot.on { width: 22px; background: var(--ember); }
+.mc-empty { padding: 24px; text-align: center; color: var(--faint); font-size: 0.88rem; }
+
+/* map pins + globe tooltips */
+.mem-pin { background: none; border: 0; }
+.mem-pin-core { position: absolute; inset: 4px; display: grid; place-items: center; border-radius: 50%; background: var(--grad-ember); color: #1a0d14; font-size: 0.74rem; font-weight: 800; box-shadow: 0 0 18px rgba(255, 138, 91, 0.8); }
+.mem-pin-pulse { position: absolute; inset: 0; border-radius: 50%; background: rgba(255, 138, 91, 0.5); animation: pulseRing 1.8s ease-out infinite; }
+.mem-tip { padding: 8px 12px; border-radius: 12px; background: rgba(10, 14, 34, 0.92); border: 1px solid var(--line); color: var(--text); font-family: var(--font-body); font-size: 12px; line-height: 1.5; }
+
+/* ===== top bar: no outer curve; logo in the top-left corner, profile in the top-right corner ===== */
+.mem-header {
+  top: 0; left: 0; right: 0; width: auto; transform: none;
+  padding: 20px clamp(18px, 3vw, 40px);
+  border: 0; border-radius: 0; background: none; backdrop-filter: none;
+}
+.mem-header::before { /* soft fade so the logo and buttons stay readable over the map */
+  content: ""; position: absolute; inset: 0 0 -28px 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(7, 11, 26, 0.75), rgba(7, 11, 26, 0));
+}
+.mem-logo { gap: 11px; font-size: 1.6rem; }
+.mem-logo-dot { width: 11px; height: 11px; box-shadow: 0 0 14px var(--ember); }
+
+@media (min-width: 521px) and (max-width: 760px) { .mem-logo-text { display: inline; font-size: 1.3rem; } }
+@media (max-width: 520px) { .mem-header { padding: 14px 14px; } }
+@media (max-width: 760px) {
+  .mem-logo-text { display: none; }
+  .mem-header { grid-template-columns: auto 1fr auto; gap: 8px; }
+  .mem-toggle { justify-self: center; }
+  .mem-toggle button { min-width: 74px; padding: 8px 12px; }
+  .mem-stats { left: 12px; bottom: 88px; width: 200px; }
+  .mem-fab { bottom: 20px; }
+  .mem-drawer { top: auto; right: 10px; left: 10px; bottom: 10px; width: auto; max-height: 72vh; }
+}
+

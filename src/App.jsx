@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import { useState , useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./Components/Signup";
 import Login from "./Components/Login";
@@ -8,6 +8,8 @@ import CreateMemory from "./CreateMemory";
 import ProfileImage from "./Components/ProfileEdit";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import socket from "./socket/socket";
+import VerifyEmail from "./Components/VerifyEmail";
+import ForgotPassword from "./Components/ForgotPassword";
 export default function App() {
   const [user, setUser] = useState(undefined); 
   
@@ -33,7 +35,6 @@ export default function App() {
   useEffect(() => {
     if (user) {
       socket.connect();
-      socket.emit("join", user.id);
     } else if (user === null) {
       // Only disconnect when confirmed logged out, not while still loading
       socket.disconnect();
@@ -54,9 +55,11 @@ export default function App() {
     <Router>
       <Routes>
         <Route
-          path="/" element={<Home/>}/>
+          path="/" element={<Home user={user} />}/>
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login refreshUser={refreshUser} />} />
+        <Route path="/verify-email" element={<VerifyEmail refreshUser={refreshUser} />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/memory" element={ <ProtectedRoute user = {user}>
         <Memory user={user} refreshUser={refreshUser} onLogout={handleLogout} />
         </ProtectedRoute> }/>
