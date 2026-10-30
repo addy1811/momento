@@ -415,12 +415,7 @@ export default function Memory({ user, onLogout }) {
         <small>{pct}% of the world lit up</small>
       </div>
 
-      {loaded && memories.length === 0 && (
-        <div className="mem-empty">
-          <h2>Your globe is dark, <em>for now.</em></h2>
-          <p>Pin your first memory and watch a place light up.</p>
-        </div>
-      )}
+      {loaded && memories.length === 0}
 
       {open && drawerAll.length > 0 && (
         <PlaceGallery
