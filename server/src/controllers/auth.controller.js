@@ -22,18 +22,26 @@ if (Buffer.byteLength(password, "utf8") > 72) {
 
 
   try {
-    const existing = await pool.query("SELECT id, email_verified FROM users WHERE email=$1", [email]);
-    const hash = await bcrypt.hash(password, 10);
+   const existing = await pool.query(
+  "SELECT id, email_verified, password_hash FROM users WHERE email=$1",
+  [email]
+);
+const hash = await bcrypt.hash(password, 10);
 
-    if (existing.rows.length) {
-      if (existing.rows[0].email_verified) {
-        return res.status(400).json({ error: "User already exists" });
-      }
-      await pool.query("UPDATE users SET name=$1, password_hash=$2 WHERE id=$3", [
-        name,
-        hash,
-        existing.rows[0].id,
-      ]);
+if (existing.rows.length) {
+  const row = existing.rows[0];
+  if (row.email_verified) {
+    return res.status(400).json({
+      error: row.password_hash
+        ? "An account with this email already exists. Please sign in."
+        : 'This email is registered with Google. Use "Continue with Google", or use Forgot password to add a password.',
+    });
+  }
+  await pool.query("UPDATE users SET name=$1, password_hash=$2 WHERE id=$3", [
+    name,
+    hash,
+    row.id,
+  ]);
     } else {
       await pool.query(
         "INSERT INTO users (name, email, password_hash, email_verified) VALUES ($1,$2,$3,FALSE)",
